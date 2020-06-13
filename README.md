@@ -1,19 +1,26 @@
-# boardgameshop
+#FUN桌遊
 
-## Project setup
-```
-npm install
-```
+##使用技術
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+* Vue cli3
+* VueRouter
+* Webpack 
+* Ajax
+* JavaScript
+* RWD
+* HTML
+* CSS
 
-### Compiles and minifies for production
-```
-npm run build
-```
+##使用插件
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* [vue-axios](https://github.com/imcvampire/vue-axios#readme)
+
+* [vue-slick](https://github.com/staskjs/vue-slick#readme)
+
+* [vue-loading-overlay](https://github.com/ankurk91/vue-loading-overlay)
+
+* [vee-validate](https://logaretm.github.io/vee-validate/)
+
+* [bootstrap](https://getbootstrap.com/)
+
+* [JQuery](https://jquery.com/)

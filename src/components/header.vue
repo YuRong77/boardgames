@@ -25,7 +25,7 @@
             >
           </li>
           <li @click="hidemenu">
-            <a href="https://github.com/YuRong77/fungames" class="text-secondary px-4">關於</a>
+            <a href="https://github.com/YuRong77/fungames" target="_blank" class="text-secondary px-4">關於</a>
           </li>
           <li @click="hidemenu">
             <router-link to="/shoppingcart" class="text-secondary px-4"
