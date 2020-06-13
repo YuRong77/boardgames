@@ -8,16 +8,12 @@
     <!--banner-->
     <div class="banner container px-0 mb-4">
       <Slick :options="bannerOptions" ref="slick">
-        <div class="img1">
+        <div class="bannerimg1">
           <h2 class="display-4 text-white text-center pt-5 mt-5">
             <strong>新貨上市</strong>
           </h2>
         </div>
-        <div class="img2">
-          <h2 class="display-4 text-white text-center pt-5 mt-5">
-            <strong>新貨上市</strong>
-          </h2>
-        </div>
+        <div class="bannerimg2"></div>
       </Slick>
     </div>
     <!--category-->
@@ -102,7 +98,7 @@
                 <del
                   class="h6 text-funOrange"
                   v-if="item.price !== item.origin_price"
-                  >原價 {{ item.origin_price }} 元</del
+                  >{{ item.origin_price }} 元</del
                 >
                 <div
                   class="h4 text-funDarkOrange"
@@ -115,7 +111,7 @@
             <div class="card-footer d-flex">
               <button
                 type="button"
-                class="btn btn-funOrange w-100 btn-sm text-light "
+                class="btn btn-funOrange w-100 btn-sm text-light"
                 @click="getProduct(item.id)"
               >
                 馬上看看
@@ -162,7 +158,7 @@
                 <del
                   class="h6 text-funOrange"
                   v-if="item.price !== item.origin_price"
-                  >原價 {{ item.origin_price }} 元</del
+                  >{{ item.origin_price }} 元</del
                 >
                 <div
                   class="h4 text-funDarkOrange"
@@ -245,7 +241,7 @@ export default {
           "<button class='btn-topr btn btn-funGray'><i class='fas fa-chevron-right fa-lg'></i></button>",
         responsive: [
           {
-            breakpoint: 769,
+            breakpoint: 900,
             settings: {
               slidesToShow: 3,
             },
@@ -278,7 +274,7 @@ export default {
           "<button class='btn-topr btn btn-funGray'><i class='fas fa-chevron-right fa-lg'></i></button>",
         responsive: [
           {
-            breakpoint: 769,
+            breakpoint: 900,
             settings: {
               slidesToShow: 3,
             },
@@ -330,14 +326,14 @@ export default {
 </script>
 
 <style>
-.banner .img1 {
+.banner .bannerimg1 {
   background-image: url(../../assets/img/banner1.png);
   background-position: center center;
   background-size: cover;
   height: 450px;
 }
-.banner .img2 {
-  background-image: url(../../assets/img/banner1.png);
+.banner .bannerimg2 {
+  background-image: url(../../assets/img/banner2.png);
   background-position: center center;
   background-size: cover;
   height: 450px;
@@ -381,11 +377,11 @@ export default {
   }
 }
 @media (max-width: 420px) {
-  .banner .img1 {
+  .banner .bannerimg1 {
     background-image: url(../../assets/img/phonebanner1.png);
   }
-  .banner .img2 {
-    background-image: url(../../assets/img/phonebanner1.png);
+  .banner .bannerimg2 {
+    background-image: url(../../assets/img/phonebanner2.png);
   }
 }
 </style>

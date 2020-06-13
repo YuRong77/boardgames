@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/funboardgames/dist/'
+  publicPath: '/fungames/dist/'
 }

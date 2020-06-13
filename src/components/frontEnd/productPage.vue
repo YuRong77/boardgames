@@ -8,11 +8,7 @@
     <!--banner-->
     <div class="productbanner container px-0">
       <Slick :options="bannerOptions" ref="slick">
-        <div class="img3">
-          <h2 class="display-4 text-white text-center pt-5 mt-5">
-            <strong>新貨上市</strong>
-          </h2>
-        </div>
+        <div class="img3"></div>
         <div class="img4">
           <h2 class="display-4 text-white text-center pt-5 mt-5">
             <strong>新貨上市</strong>
@@ -105,7 +101,7 @@
                     <del
                       class="h6 text-funOrange"
                       v-if="item.price !== item.origin_price"
-                      >原價 {{ item.origin_price }} 元</del
+                      >{{ item.origin_price }} 元</del
                     >
                     <div
                       class="h4 text-funDarkOrange"
@@ -293,7 +289,7 @@ export default {
 
 <style scoped>
 .productbanner .img3 {
-  background-image: url(../../assets/img/banner1.png);
+  background-image: url(../../assets/img/banner2.png);
   background-position: center center;
   background-size: cover;
   height: 450px;
@@ -311,7 +307,7 @@ export default {
 
 @media (max-width: 420px) {
   .productbanner .img3 {
-    background-image: url(../../assets/img/phonebanner1.png);
+    background-image: url(../../assets/img/phonebanner2.png);
   }
   .productbanner .img4 {
     background-image: url(../../assets/img/phonebanner1.png);
