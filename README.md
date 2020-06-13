@@ -1,6 +1,6 @@
-#FUN桌遊
+# FUN桌遊
 
-##使用技術
+## 使用技術
 
 * Vue cli3
 * VueRouter
@@ -11,7 +11,7 @@
 * HTML
 * CSS
 
-##使用插件
+## 使用插件
 
 * [vue-axios](https://github.com/imcvampire/vue-axios#readme)
 
