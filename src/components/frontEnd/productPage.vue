@@ -243,7 +243,7 @@ export default {
       this.filterproducts();
     },
     search: function() {
-      !this.search ? this.filterproducts() : this.filterSearch();
+      (this.search) ? this.filterSearch():this.filterproducts();
     },
   },
   methods: {
@@ -308,6 +308,7 @@ export default {
   },
   created() {
     this.getProducts();
+    this.filterproducts()
     this.getCart();
   },
 };
