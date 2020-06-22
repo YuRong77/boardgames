@@ -340,10 +340,10 @@ export default {
   },
   methods: {
     getproduct(page = 1) {
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`;
       const vm = this;
-      this.isLoading = true;
-      this.$http.get(url).then((response) => {
+      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products?page=${page}`;
+      vm.isLoading = true;
+      vm.$http.get(url).then((response) => {
         vm.isLoading = false;
         vm.product = response.data.products;
         vm.pagination = response.data.pagination;
@@ -363,11 +363,11 @@ export default {
       const vm = this;
       let url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`;
       let httpMethod = "post";
-      if (!this.isNew) {
+      if (!vm.isNew) {
         url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
         httpMethod = "put";
       }
-      this.$http[httpMethod](url, { data: vm.tempProduct }).then((response) => {
+      vm.$http[httpMethod](url, { data: vm.tempProduct }).then((response) => {
         if (response.data.success) {
           $("#productModal").modal("hide");
           vm.getproduct();
@@ -384,7 +384,7 @@ export default {
     delProduct() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-      this.$http.delete(url).then((response) => {
+      vm.$http.delete(url).then((response) => {
         $("#delProductModal").modal("hide");
         vm.getproduct();
       });
@@ -395,8 +395,8 @@ export default {
       const formData = new FormData();
       formData.append("file-to-upload", file);
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
-      this.smLoading = true;
-      this.$http
+      vm.smLoading = true;
+      vm.$http
         .post(url, formData, {
           headers: {
             "Content-Type": "multipart/form-data",

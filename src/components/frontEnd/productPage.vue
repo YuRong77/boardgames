@@ -7,14 +7,12 @@
     </loading>
     <!--banner-->
     <div class="productbanner container px-0">
-      <Slick :options="bannerOptions" ref="slick">
-        <div class="img3"></div>
-        <div class="img4">
-          <h2 class="display-4 text-white text-center pt-5 mt-5">
-            <strong>新貨上市</strong>
-          </h2>
-        </div>
-      </Slick>
+      <swiper class="swiper" :options="bannerOptions">
+        <swiper-slide><div class="bannerimg3"></div></swiper-slide>
+        <swiper-slide><div class="bannerimg4"></div></swiper-slide>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
+      </swiper>
     </div>
     <!--productlist-->
     <div class="productlist container">
@@ -68,8 +66,26 @@
               @click.prevent="productCategory = '推理'"
               >推理遊戲</a
             >
+            <!--search-->
+            <div class="input-group mt-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text bg-light border">
+                  <i class="fas fa-search text-funOrange"></i>
+                </span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="輸入桌遊名稱"
+                aria-label="Search"
+                v-model.trim="search"
+              />
+            </div>
+
+
           </div>
         </div>
+        <!--products-->
         <div class="col-md-9">
           <div class="row">
             <div
@@ -138,7 +154,7 @@
           <div
             class="text-center my-5"
             aria-label="Page navigation example"
-            v-if="productCategory == ''"
+            v-if="productCategory == '' && search == ''"
           >
             <div class="nav d-inline-block">
               <ul class="pagination">
@@ -192,32 +208,33 @@
 
 <script>
 import $ from "jquery";
-import Slick from "vue-slick";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 
 export default {
   components: {
-    Slick,
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
       isLoading: false,
       bannerOptions: {
-        slidesToShow: 1,
-        arrows: true,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        dots: false,
-        prevArrow:
-          "<button class='btn btn-l'><i class='fas fa-chevron-left fa-2x'></i></button>",
-        nextArrow:
-          "<button class='btn btn-r'><i class='fas fa-chevron-right fa-2x'></i></button>",
+        autoplay: {
+          delay: 5000,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
       },
       products: [],
+      allproducts: [],
       loadingItem: "",
       product: {},
       cart: {},
       productCategory: "",
       filterProducts: [],
+      search: "",
       pagination: {},
     };
   },
@@ -225,13 +242,16 @@ export default {
     productCategory: function() {
       this.filterproducts();
     },
+    search: function() {
+      !this.search ? this.filterproducts() : this.filterSearch();
+    },
   },
   methods: {
     getProducts(page = 1) {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
-      this.isLoading = true;
-      this.$http.get(url).then((response) => {
+      vm.isLoading = true;
+      vm.$http.get(url).then((response) => {
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
         vm.isLoading = false;
@@ -244,12 +264,11 @@ export default {
     },
     filterproducts() {
       const vm = this;
-      let allproducts = [];
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      this.$http.get(url).then((response) => {
-        allproducts = response.data.products;
+      vm.$http.get(url).then((response) => {
+        vm.allproducts = response.data.products;
         if (vm.productCategory !== "") {
-          vm.filterProducts = allproducts.filter(
+          vm.filterProducts = vm.allproducts.filter(
             (item) => item.category == vm.productCategory
           );
         } else {
@@ -257,15 +276,22 @@ export default {
         }
       });
     },
+    filterSearch() {
+      let vm = this;
+      const searchAry = vm.allproducts.filter((item) =>
+        item.title.match(vm.search)
+      );
+      vm.filterProducts = searchAry;
+    },
     addtoCart(id, qty = 1) {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      this.loadingItem = id;
+      vm.loadingItem = id;
       const cart = {
         product_id: id,
         qty,
       };
-      this.$http.post(url, { data: cart }).then((response) => {
+      vm.$http.post(url, { data: cart }).then((response) => {
         vm.loadingItem = "";
         vm.getCart();
         $("#productModal").modal("hide");
@@ -275,7 +301,7 @@ export default {
     getCart() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      this.$http.get(url).then((response) => {
+      vm.$http.get(url).then((response) => {
         vm.cart = response.data.data;
       });
     },
@@ -288,13 +314,17 @@ export default {
 </script>
 
 <style scoped>
-.productbanner .img3 {
+.swiper-container {
+  --swiper-navigation-color: white;
+  --swiper-navigation-size: 30px;
+}
+.productbanner .bannerimg3 {
   background-image: url(../../assets/img/banner2.png);
   background-position: center center;
   background-size: cover;
   height: 450px;
 }
-.productbanner .img4 {
+.productbanner .bannerimg4 {
   background-image: url(../../assets/img/banner1.png);
   background-position: center center;
   background-size: cover;
@@ -306,10 +336,10 @@ export default {
 }
 
 @media (max-width: 420px) {
-  .productbanner .img3 {
+  .productbanner .bannerimg3 {
     background-image: url(../../assets/img/phonebanner2.png);
   }
-  .productbanner .img4 {
+  .productbanner .bannerimg4 {
     background-image: url(../../assets/img/phonebanner1.png);
   }
 }

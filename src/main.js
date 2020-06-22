@@ -11,7 +11,9 @@ import { ValidationProvider, extend } from 'vee-validate';
 import { localize } from 'vee-validate'
 import  { required, email }  from 'vee-validate/dist/rules';
 import zhTW from 'vee-validate/dist/locale/zh_TW'
-import "slick-carousel/slick/slick.css";
+import 'swiper/css/swiper.css';
+
+
 
 import App from './App.vue'
 import router from './router'

@@ -233,7 +233,7 @@ export default {
     openCouponModal(isNew, item) {
       const vm = this;
       $("#couponModal").modal("show");
-      this.isNew = isNew;
+      vm.isNew = isNew;
       if (vm.isNew) {
         vm.tempCoupon = {};
       } else {
@@ -247,24 +247,24 @@ export default {
     getCoupons() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons`;
-      this.isLoading=true;
-      this.$http.get(url, vm.tempProduct).then((response) => {
+      vm.isLoading=true;
+      vm.$http.get(url, vm.tempProduct).then((response) => {
         vm.coupons = response.data.coupons;
         vm.isLoading=false;
       });
     },
     updateCoupon() {
       const vm = this;
-      if (this.isNew) {
+      if (vm.isNew) {
         const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
-        this.$http.post(url, { data: vm.tempCoupon }).then((response) => {
+        vm.$http.post(url, { data: vm.tempCoupon }).then((response) => {
           $("#couponModal").modal("hide");
           vm.getCoupons();
         });
       } else {
         const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
         vm.due_date = new Date(vm.tempCoupon.due_date * 1000);
-        this.$http.put(url, { data: vm.tempCoupon }).then((response) => {
+        vm.$http.put(url, { data: vm.tempCoupon }).then((response) => {
           console.log(response);
           $("#couponModal").modal("hide");
           vm.getCoupons();
@@ -278,7 +278,7 @@ export default {
     delCoupon() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-      this.$http.delete(url).then((response) => {
+      vm.$http.delete(url).then((response) => {
         $("#delCouponModal").modal("hide");
         vm.getCoupons();
       });

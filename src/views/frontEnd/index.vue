@@ -105,7 +105,7 @@ export default {
     getCart() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      this.$http.get(url).then((response) => {
+      vm.$http.get(url).then((response) => {
         vm.cart = response.data.data;
       });
     },
@@ -113,7 +113,7 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       vm.loadingItem = id;
-      this.$http.delete(url).then((response) => {
+      vm.$http.delete(url).then((response) => {
         vm.loadingItem = "";
       });
     },

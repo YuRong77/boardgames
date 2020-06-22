@@ -114,8 +114,12 @@
       <!--relatedproducts-->
       <div class="relatedproducts container px-0 mb-5">
         <h3 class="h4 font-weight-bolder mb-4">你可能會喜歡</h3>
-        <Slick :options="relatedproductsOptions" v-if="relatedproducts.length">
-          <div v-for="item in relatedproducts" :key="item.id">
+        <swiper
+          class="swiper"
+          :options="gamesOptions"
+          v-if="relatedproducts.length"
+        >
+          <swiper-slide v-for="item in relatedproducts" :key="item.id">
             <div class="card shadow-sm m-2">
               <div
                 style="height: 180px; background-repeat:no-repeat; background-position: center"
@@ -137,7 +141,7 @@
                   <del
                     class="h6 text-funOrange"
                     v-if="item.price !== item.origin_price"
-                    >原價 {{ item.origin_price }} 元</del
+                    >{{ item.origin_price }} 元</del
                   >
                   <div
                     class="h4 text-funDarkOrange"
@@ -150,15 +154,16 @@
               <div class="card-footer d-flex">
                 <button
                   type="button"
-                  class="btn btn-sm btn-funOrange w-100 text-light "
+                  :data-id="item.id"
+                  class="btn btn-funOrange w-100 btn-sm text-light "
                   @click="toProduct(item.id)"
                 >
                   馬上看看
                 </button>
               </div>
             </div>
-          </div>
-        </Slick>
+          </swiper-slide>
+        </swiper>
       </div>
     </div>
   </div>
@@ -166,45 +171,44 @@
 
 <script>
 import $ from "jquery";
-import Slick from "vue-slick";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 
 export default {
   inject: ["reload"],
   components: {
-    Slick,
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
       product: {},
       isLoading: false,
       relatedproducts: [],
-      relatedproductsOptions: {
-        slidesToShow: 4,
-        arrows: false,
-        dots: false,
-        autoplay: false,
-        responsive: [
-          {
-            breakpoint: 1000,
-            settings: {
-              slidesToShow: 2,
-              centerMode: true,
-            },
+      gamesOptions: {
+        observer: true,
+        observeParents: true,
+        autoplay: {
+          disableOnInteraction: false,
+          delay: 3500,
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 5,
           },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 2,
-            },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 10,
           },
-          {
-            breakpoint: 430,
-            settings: {
-              slidesToShow: 1,
-              centerMode: true,
-            },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 10,
           },
-        ],
+          430: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+        },
       },
     };
   },
@@ -218,16 +222,16 @@ export default {
       const vm = this;
       const id = this.$route.params.id;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
-      this.$http.get(url).then((response) => {
+      vm.$http.get(url).then((response) => {
         vm.product = response.data.product;
         vm.product.num = 1;
       });
-      this.getProducts();
+      vm.getProducts();
     },
     getProducts() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      this.$http.get(url).then((response) => {
+      vm.$http.get(url).then((response) => {
         vm.relatedproducts = response.data.products.filter(
           (item) =>
             item.category == vm.product.category &&
@@ -242,8 +246,8 @@ export default {
         product_id: id,
         qty,
       };
-      this.isLoading = true;
-      this.$http.post(url, { data: cart }).then((response) => {
+      vm.isLoading = true;
+      vm.$http.post(url, { data: cart }).then((response) => {
         vm.isLoading = false;
         vm.$bus.$emit("message:push", "加入成功", "funOrange");
       });
@@ -253,10 +257,9 @@ export default {
       this.reload();
     },
   },
-  created() {
+  mounted() {
     this.getProduct();
     this.getProducts();
   },
 };
 </script>
-

@@ -11,21 +11,3 @@ img {
   max-width: 100%;
 }
 
-//banner btn
-.btn-r {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0px;
-  color: white;
-}
-.btn-l {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: 0px;
-  color: white;
-  z-index: 10;
-}
-
-

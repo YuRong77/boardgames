@@ -7,14 +7,12 @@
     </loading>
     <!--banner-->
     <div class="banner container px-0 mb-4">
-      <Slick :options="bannerOptions" ref="slick">
-        <div class="bannerimg1">
-          <h2 class="display-4 text-white text-center pt-5 mt-5">
-            <strong>新貨上市</strong>
-          </h2>
-        </div>
-        <div class="bannerimg2"></div>
-      </Slick>
+      <swiper class="swiper" :options="bannerOptions">
+        <swiper-slide><div class="bannerimg1"></div></swiper-slide>
+        <swiper-slide><div class="bannerimg2"></div></swiper-slide>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
+      </swiper>
     </div>
     <!--category-->
     <div class="category container px-0 mb-5">
@@ -77,8 +75,8 @@
     <!--topgames-->
     <div class="topgames container px-0 mb-5">
       <h3 class="h4 font-weight-bolder mb-4 px-2">熱門遊戲</h3>
-      <Slick :options="topgamesOptions" v-if="topProducts.length">
-        <div v-for="item in topProducts" :key="item.id">
+      <swiper class="swiper" :options="gamesOptions" v-if="topProducts.length">
+        <swiper-slide v-for="item in topProducts" :key="item.id">
           <div class="card shadow-sm m-2">
             <div
               style="height: 180px; background-repeat:no-repeat; background-position: center"
@@ -111,15 +109,16 @@
             <div class="card-footer d-flex">
               <button
                 type="button"
-                class="btn btn-funOrange w-100 btn-sm text-light"
+                :data-id="item.id"
+                class="btn btn-funOrange w-100 btn-sm text-light "
                 @click="getProduct(item.id)"
               >
                 馬上看看
               </button>
             </div>
           </div>
-        </div>
-      </Slick>
+        </swiper-slide>
+      </swiper>
     </div>
     <!--coupon-->
     <div
@@ -137,8 +136,8 @@
     <!--newgames-->
     <div class="newgames container px-0 mb-5">
       <h3 class="h4 font-weight-bolder mb-4 px-2">最新商品</h3>
-      <Slick :options="newgamesOptions" v-if="newProducts.length">
-        <div v-for="item in newProducts" :key="item.id">
+      <swiper class="swiper" :options="gamesOptions" v-if="newProducts.length">
+        <swiper-slide v-for="item in newProducts" :key="item.id">
           <div class="card shadow-sm m-2">
             <div
               style="height: 180px; background-repeat:no-repeat; background-position: center"
@@ -171,6 +170,7 @@
             <div class="card-footer d-flex">
               <button
                 type="button"
+                :data-id="item.id"
                 class="btn btn-funOrange w-100 btn-sm text-light "
                 @click="getProduct(item.id)"
               >
@@ -178,14 +178,15 @@
               </button>
             </div>
           </div>
-        </div>
-      </Slick>
+        </swiper-slide>
+      </swiper>
     </div>
+
     <!--article-->
     <div class="article container px-0 mb-5">
       <h3 class="h4 font-weight-bolder mb-4 px-2">相關文章</h3>
       <div class="row justify-content-around mx-0">
-        <div class="col-md-5 border shadow  px-0">
+        <div class="col-md-5 border shadow mb-2 px-0">
           <div class="article-img"></div>
           <div class="article-text p-3">
             <h4 class="h5">
@@ -194,7 +195,7 @@
             <a href="#">繼續閱讀...</a>
           </div>
         </div>
-        <div class="col-md-5 border shadow px-0">
+        <div class="col-md-5 border shadow mb-2 px-0">
           <div class="article2-img"></div>
           <div class="article-text p-3">
             <h4 class="h5">
@@ -210,90 +211,49 @@
 
 <script>
 import $ from "jquery";
-import Slick from "vue-slick";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 
 export default {
   components: {
-    Slick,
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
       bannerOptions: {
-        slidesToShow: 1,
-        arrows: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        dots: false,
-        prevArrow:
-          "<button class='btn-l btn'><i class='fas fa-chevron-left fa-2x'></i></button>",
-        nextArrow:
-          "<button class='btn-r btn'><i class='fas fa-chevron-right fa-2x'></i></button>",
+        autoplay: {
+          delay: 5000,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
       },
-      topgamesOptions: {
-        slidesToShow: 4,
-        arrows: true,
-        dots: false,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        prevArrow:
-          "<button class='btn-topl btn btn-funGray'><i class='fas fa-chevron-left fa-lg'></i></button>",
-        nextArrow:
-          "<button class='btn-topr btn btn-funGray'><i class='fas fa-chevron-right fa-lg'></i></button>",
-        responsive: [
-          {
-            breakpoint: 900,
-            settings: {
-              slidesToShow: 3,
-            },
+      gamesOptions: {
+        observer: true,
+        observeParents: true,
+        autoplay: {
+          disableOnInteraction: false,
+          delay: 3500,
+        },
+        breakpoints: {
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 5,
           },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 2,
-              arrows: false,
-            },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 10,
           },
-          {
-            breakpoint: 430,
-            settings: {
-              slidesToShow: 1,
-              centerMode: true,
-            },
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 10,
           },
-        ],
-      },
-      newgamesOptions: {
-        slidesToShow: 4,
-        arrows: true,
-        dots: false,
-        autoplay: true,
-        autoplaySpeed: 4000,
-        prevArrow:
-          "<button class='btn-topl btn btn-funGray'><i class='fas fa-chevron-left fa-lg'></i></button>",
-        nextArrow:
-          "<button class='btn-topr btn btn-funGray'><i class='fas fa-chevron-right fa-lg'></i></button>",
-        responsive: [
-          {
-            breakpoint: 900,
-            settings: {
-              slidesToShow: 3,
-            },
+          430: {
+            slidesPerView: 1,
+            spaceBetween: 20,
           },
-          {
-            breakpoint: 768,
-            settings: {
-              slidesToShow: 2,
-              arrows: false,
-            },
-          },
-          {
-            breakpoint: 430,
-            settings: {
-              slidesToShow: 1,
-              centerMode: true,
-            },
-          },
-        ],
+        },
       },
       topProducts: [],
       newProducts: [],
@@ -304,8 +264,8 @@ export default {
     getProducts() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      this.isLoading = true;
-      this.$http.get(url).then((response) => {
+      vm.isLoading = true;
+      vm.$http.get(url).then((response) => {
         vm.topProducts = response.data.products.filter(
           (product) => product.category == "策略"
         );
@@ -326,6 +286,10 @@ export default {
 </script>
 
 <style>
+.swiper-container{
+    --swiper-navigation-color: white;
+    --swiper-navigation-size: 30px;
+  }
 .banner .bannerimg1 {
   background-image: url(../../assets/img/banner1.png);
   background-position: center center;
@@ -338,23 +302,8 @@ export default {
   background-size: cover;
   height: 450px;
 }
-.category a:hover{
-  background: #F8F8F8;
-}
-.btn-topr {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: -10px;
-  color: white;
-}
-.btn-topl {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  left: -10px;
-  color: white;
-  z-index: 10;
+.category a:hover {
+  background: #f8f8f8;
 }
 .article-img {
   background-image: url(../../assets/img/article1.png);
@@ -367,9 +316,6 @@ export default {
   background-position: center center;
   background-size: cover;
   height: 200px;
-}
-.slick-slide {
-  outline: none;
 }
 @media (max-width: 768px) {
   .category h4 {
