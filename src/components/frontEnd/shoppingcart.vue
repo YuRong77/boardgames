@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div class="bg-light pb-4">
+    <div class="container-lg bg-white shadow px-0 pb-2">
     <loading :active.sync="isLoading">
       <template slot="default">
         <img src="../../assets/img/loading.svg" alt="" />
       </template>
     </loading>
-    <div class="row justify-content-center mt-5 mx-0">
-      <div class="col-lg-6">
+    <div class="row justify-content-center pt-5 mx-0">
+      <div class="col-lg-10">
         <h3 class="text-center font-weight-bold mb-5">購物清單</h3>
         <table
           class="table table-borderless"
@@ -95,7 +96,7 @@
       class="row justify-content-center my-5 mx-0"
       :class="{ 'd-none': cart.carts && cart.carts.length == 0 }"
     >
-      <div class="col-lg-6">
+      <div class="col-lg-10">
         <h3 class="text-center font-weight-bold mb-5">客戶資訊</h3>
         <form @submit.prevent="createOrder">
           <div class="form-group">
@@ -183,7 +184,7 @@
       </div>
     </div>
     <div
-      class="noproduct container bg-funGray text-center rounded p-5"
+      class="noproduct bg-funGray text-center rounded py-5 mx-5"
       :class="{ 'd-none': cart.carts && cart.carts.length !== 0 }"
     >
       <h4 class="mb-5">哎呀，購物車是空的</h4>
@@ -196,6 +197,7 @@
         >馬上逛逛</router-link
       >
     </div>
+  </div>
   </div>
 </template>
 

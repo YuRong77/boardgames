@@ -67,7 +67,7 @@
 
 <script>
 import $ from 'jquery';
-import alert from '../../components/alertMessage.vue';
+import alert from '../../components/AlertMessage.vue';
 
 export default {
   components: {

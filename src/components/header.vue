@@ -1,6 +1,6 @@
 <template>
-  <div class="header container-fluid bg-white fixed-top px-0">
-    <div class="container d-flex justify-content-between align-items-center  ">
+  <div class="header bg-white fixed-top px-0">
+    <div class="container-lg d-flex justify-content-between align-items-center  ">
       <router-link to="/home"
         ><img src="../assets/img/logo.svg" alt=""
       /></router-link>

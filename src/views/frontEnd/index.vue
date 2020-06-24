@@ -5,7 +5,7 @@
     <div class="box w-100"></div>
     <router-view />
     <Footer />
-    <div class="shoppingCart bg-light shadow-sm border p-3 animate__animated animate__rubberBand ">
+    <div class="shoppingCart bg-white shadow-sm border p-3 animate__animated animate__rubberBand ">
       <h3 class="h5 d-inline-block">購物清單</h3>
       <div
         class="nocart text-center mt-5 mb-5"
@@ -80,9 +80,9 @@
 
 <script>
 import $ from 'jquery';
-import alert from '../../components/alertMessage.vue';
-import Header from '../../components/header.vue';
-import Footer from '../../components/footer.vue';
+import alert from '../../components/AlertMessage.vue';
+import Header from '../../components/Header.vue';
+import Footer from '../../components/Footer.vue';
 
 export default {
   components: {
