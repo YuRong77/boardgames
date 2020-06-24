@@ -18,7 +18,7 @@
         v-if="cart.carts && cart.carts.length !== 0"
       >
         <tbody>
-          <tr v-for="item in cart.carts">
+          <tr v-for="item in cart.carts" :key="item.id">
             <td class="align-middle">
               <button
                 type="button"
@@ -54,7 +54,8 @@
       </button>
     </div>
     <button
-      class="shoppingCartBtn btn bg-white d-flex justify-content-center align-items-center border-funOrange"
+      class="shoppingCartBtn btn bg-white d-flex justify-content-center
+      align-items-center border-funOrange"
       @click="show"
     >
       <div class="d-flex flex-column">
@@ -78,11 +79,10 @@
 </template>
 
 <script>
-import $ from "jquery";
-import alert from "../../components/alertMessage";
-import Header from "../../components/header";
-import Footer from "../../components/footer";
-
+import $ from 'jquery';
+import alert from '../../components/alertMessage.vue';
+import Header from '../../components/header.vue';
+import Footer from '../../components/footer.vue';
 
 export default {
   components: {
@@ -93,11 +93,11 @@ export default {
   data() {
     return {
       cart: {},
-      loadingItem: "",
+      loadingItem: '',
     };
   },
   watch: {
-    cart: function() {
+    cart() {
       this.getCart();
     },
   },
@@ -113,16 +113,16 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       vm.loadingItem = id;
-      vm.$http.delete(url).then((response) => {
-        vm.loadingItem = "";
+      vm.$http.delete(url).then(() => {
+        vm.loadingItem = '';
       });
     },
     show() {
-      $(".shoppingCart").toggleClass("show");
+      $('.shoppingCart').toggleClass('show');
     },
     checkout() {
-      $(".shoppingCart").toggleClass("show");
-      this.$router.push("/shoppingcart");
+      $('.shoppingCart').toggleClass('show');
+      this.$router.push('/shoppingcart');
     },
   },
   created() {
@@ -197,6 +197,3 @@ export default {
   }
 }
 </style>
-
-
-

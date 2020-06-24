@@ -1,18 +1,18 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-  const routes = [
+const routes = [
   {
-    path:'*',
-    redirect:'/',
-  },  
+    path: '*',
+    redirect: '/',
+  },
   {
     path: '/',
     name: 'Index',
     component: () => import('../views/frontEnd/index.vue'),
-    children:[
+    children: [
       {
         path: '',
         name: 'Home',
@@ -36,57 +36,57 @@ Vue.use(VueRouter)
       {
         path: 'customer_checkout/:orderId',
         name: 'CustomerCheckout',
-        component: () => import('../components/customerCheckout.vue')
+        component: () => import('../components/customerCheckout.vue'),
       },
-    ]
+    ],
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('../views/backEnd/login.vue')
+    component: () => import('../views/backEnd/login.vue'),
   },
   {
     path: '/admin',
     name: 'Dashboard',
     component: () => import('../views/backEnd/dashboard.vue'),
-    children:[
+    children: [
       {
         path: 'adminproduct',
         name: 'AdminProduct',
-        meta:{requiresAuth:true},
-        component: () => import('../components/backEnd/adminproduct.vue')
+        meta: { requiresAuth: true },
+        component: () => import('../components/backEnd/adminproduct.vue'),
       },
       {
         path: 'order',
         name: 'Order',
-        meta:{requiresAuth:true},
-        component: () => import('../components/backEnd/order.vue')
+        meta: { requiresAuth: true },
+        component: () => import('../components/backEnd/order.vue'),
       },
       {
         path: 'coupon',
         name: 'Coupon',
-        meta:{requiresAuth:true},
-        component: () => import('../components/backEnd/coupon.vue')
+        meta: { requiresAuth: true },
+        component: () => import('../components/backEnd/coupon.vue'),
       },
       {
         path: 'customer_order',
         name: 'CustomerOrder',
-        component: () => import('../components/backEnd/customerOrder.vue')
+        component: () => import('../components/backEnd/customerOrder.vue'),
       },
       {
         path: 'customer_checkout/:orderId',
         name: 'TextCustomerCheckout',
-        component: () => import('../components/customerCheckout.vue')
+        component: () => import('../components/customerCheckout.vue'),
       },
-    ]
+    ],
   },
-]
+];
 
 const router = new VueRouter({
   routes,
   scrollBehavior() {
-      return { x: 0, y: 0 }
+    return { x: 0, y: 0 };
   },
-})
+});
 
-export default router
+export default router;

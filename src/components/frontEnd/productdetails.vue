@@ -170,11 +170,10 @@
 </template>
 
 <script>
-import $ from "jquery";
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 
 export default {
-  inject: ["reload"],
+  inject: ['reload'],
   components: {
     Swiper,
     SwiperSlide,
@@ -214,13 +213,13 @@ export default {
   },
   watch: {
     $route() {
-      this.reload(); //相關產品上一頁重整
+      this.reload(); // 相關產品上一頁重整
     },
   },
   methods: {
     getProduct() {
       const vm = this;
-      const id = this.$route.params.id;
+      const { id } = this.$route.params;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
       vm.$http.get(url).then((response) => {
         vm.product = response.data.product;
@@ -233,9 +232,8 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       vm.$http.get(url).then((response) => {
         vm.relatedproducts = response.data.products.filter(
-          (item) =>
-            item.category == vm.product.category &&
-            item.title !== vm.product.title
+          (item) => item.category === vm.product.category
+            && item.title !== vm.product.title,
         );
       });
     },
@@ -247,9 +245,9 @@ export default {
         qty,
       };
       vm.isLoading = true;
-      vm.$http.post(url, { data: cart }).then((response) => {
+      vm.$http.post(url, { data: cart }).then(() => {
         vm.isLoading = false;
-        vm.$bus.$emit("message:push", "加入成功", "funOrange");
+        vm.$bus.$emit('message:push', '加入成功', 'funOrange');
       });
     },
     toProduct(id) {

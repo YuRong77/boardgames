@@ -66,8 +66,8 @@
 </template>
 
 <script>
-import $ from "jquery";
-import alert from "../../components/alertMessage";
+import $ from 'jquery';
+import alert from '../../components/alertMessage.vue';
 
 export default {
   components: {
@@ -79,18 +79,18 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/logout`;
       vm.$http.post(url).then((response) => {
         if (response.data.success) {
-          vm.$router.push("/");
+          vm.$router.push('/');
         }
       });
     },
     showsidebar() {
-      $(".sidebar").toggleClass("show");
-      $(".sidebarbackground").toggleClass("d-block");
+      $('.sidebar').toggleClass('show');
+      $('.sidebarbackground').toggleClass('d-block');
     },
     hidesidebar() {
-      $(".sidebar").removeClass("show");
-      $(".sidebarbackground").removeClass("d-block");
-    }
+      $('.sidebar').removeClass('show');
+      $('.sidebarbackground').removeClass('d-block');
+    },
   },
 };
 </script>

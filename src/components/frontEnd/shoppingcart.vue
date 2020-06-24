@@ -19,7 +19,7 @@
             <th>單價</th>
           </thead>
           <tbody>
-            <tr v-for="item in cart.carts">
+            <tr v-for="item in cart.carts" :key="item.id">
               <td class="align-middle">
                 <button
                   type="button"
@@ -100,7 +100,7 @@
         <form @submit.prevent="createOrder">
           <div class="form-group">
             <ValidationProvider rules="required|email" v-slot="{ errors }">
-              <label for="useremail">Email</label>
+              <label for="useremail">Email<span class="text-funDarkOrange"> *</span></label>
               <input
                 type="email"
                 class="form-control"
@@ -111,12 +111,12 @@
                 placeholder="請輸入 Email"
                 required
               />
-              <span class="text-danger">{{ errors[0] }}</span>
+              <span class="text-funDarkOrange">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
 
           <div class="form-group">
-            <label for="username">收件人姓名</label>
+            <label for="username">收件人姓名<span class="text-funDarkOrange"> *</span></label>
             <ValidationProvider rules="required" v-slot="{ errors }">
               <input
                 type="text"
@@ -128,12 +128,12 @@
                 placeholder="輸入姓名"
                 required
               />
-              <span class="text-danger">{{ errors[0] }}</span>
+              <span class="text-funDarkOrange">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
 
           <div class="form-group">
-            <label for="usertel">收件人電話</label>
+            <label for="usertel">收件人電話<span class="text-funDarkOrange"> *</span></label>
             <ValidationProvider rules="required" v-slot="{ errors }">
               <input
                 type="tel"
@@ -144,12 +144,12 @@
                 placeholder="請輸入電話"
                 required
               />
-              <span class="text-danger">{{ errors[0] }}</span>
+              <span class="text-funDarkOrange">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
 
           <div class="form-group">
-            <label for="useraddress">收件人地址</label>
+            <label for="useraddress">收件人地址<span class="text-funDarkOrange"> *</span></label>
             <ValidationProvider rules="required" v-slot="{ errors }">
               <input
                 type="text"
@@ -161,7 +161,7 @@
                 placeholder="請輸入地址"
                 required
               />
-              <span class="text-danger">{{ errors[0] }}</span>
+              <span class="text-funDarkOrange">{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
 
@@ -204,19 +204,19 @@ export default {
   data() {
     return {
       cart: {},
-      coupon_code: "",
+      coupon_code: '',
       coupon_mseeage: {
-        msg: "",
+        msg: '',
         success: true,
       },
       form: {
         user: {
-          name: "",
-          email: "",
-          tel: "",
-          address: "",
+          name: '',
+          email: '',
+          tel: '',
+          address: '',
         },
-        message: "",
+        message: '',
       },
       isLoading: false,
     };
@@ -235,7 +235,7 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       vm.isLoading = true;
-      vm.$http.delete(url).then((response) => {
+      vm.$http.delete(url).then(() => {
         vm.isLoading = false;
         vm.getCart();
       });

@@ -42,7 +42,7 @@
               ><i class="fas fa-user-cog"></i
             ></router-link>
             <p class="text-secondary m-0">
-              YuRong &copy2020 Vue相關作品，無其他用途。
+              YuRong &copy;2020 Vue相關作品，無其他用途。
             </p>
           </div>
         </div>

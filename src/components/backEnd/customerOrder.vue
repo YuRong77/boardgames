@@ -150,7 +150,7 @@
             <th>單價</th>
           </thead>
           <tbody>
-            <tr v-for="item in cart.carts">
+            <tr v-for="item in cart.carts" :key="item.id">
               <td class="align-middle">
                 <button
                   type="button"
@@ -309,29 +309,29 @@
 </template>
 
 <script>
-import $ from "jquery";
+import $ from 'jquery';
 
 export default {
   data() {
     return {
       products: [],
       product: {},
-      loadingItem: "",
+      loadingItem: '',
       isLoading: false,
       cart: {},
-      coupon_code: "",
+      coupon_code: '',
       coupon_mseeage: {
-        msg: "",
+        msg: '',
         success: true,
       },
       form: {
         user: {
-          name: "",
-          email: "",
-          tel: "",
-          address: "",
+          name: '',
+          email: '',
+          tel: '',
+          address: '',
         },
-        message: "",
+        message: '',
       },
     };
   },
@@ -351,8 +351,8 @@ export default {
       vm.loadingItem = id;
       vm.$http.get(url).then((response) => {
         vm.product = response.data.product;
-        $("#productModal").modal("show");
-        vm.loadingItem = "";
+        $('#productModal').modal('show');
+        vm.loadingItem = '';
         vm.product.num = 1;
       });
     },
@@ -364,10 +364,10 @@ export default {
         product_id: id,
         qty,
       };
-      vm.$http.post(url, { data: cart }).then((response) => {
-        vm.loadingItem = "";
+      vm.$http.post(url, { data: cart }).then(() => {
+        vm.loadingItem = '';
         vm.getCart();
-        $("#productModal").modal("hide");
+        $('#productModal').modal('hide');
       });
     },
     getCart() {
@@ -383,7 +383,7 @@ export default {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
       vm.isLoading = true;
-      vm.$http.delete(url).then((response) => {
+      vm.$http.delete(url).then(() => {
         vm.isLoading = false;
         vm.getCart();
       });

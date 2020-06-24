@@ -25,7 +25,8 @@
               query: { productCategory: '兒童' },
             }"
             href="#"
-            class="category-items d-flex align-items-center justify-content-center btn border rounded py-2 mb-2"
+            class="category-items d-flex align-items-center justify-content-center
+            btn border rounded py-2 mb-2"
           >
             <img src="../../assets/img/child.png" alt="" />
             <h4 class="h5 m-0 ml-1">兒童遊戲</h4>
@@ -38,7 +39,8 @@
               query: { productCategory: '派對' },
             }"
             href="#"
-            class="category-items d-flex align-items-center justify-content-center btn border rounded py-2 mb-2"
+            class="category-items d-flex align-items-center justify-content-center
+            btn border rounded py-2 mb-2"
           >
             <img src="../../assets/img/party.png" alt="" />
             <h4 class="h5 m-0 ml-1">派對遊戲</h4>
@@ -51,7 +53,8 @@
               query: { productCategory: '策略' },
             }"
             href="#"
-            class="category-items d-flex align-items-center justify-content-center btn border rounded py-2 mb-2"
+            class="category-items d-flex align-items-center justify-content-center
+            btn border rounded py-2 mb-2"
           >
             <img src="../../assets/img/sword.png" alt="" />
             <h4 class="h5 m-0 ml-1">策略遊戲</h4>
@@ -64,7 +67,8 @@
               query: { productCategory: '推理' },
             }"
             href="#"
-            class="category-items d-flex align-items-center justify-content-center btn border rounded py-2 mb-2"
+            class="category-items d-flex align-items-center justify-content-center
+            btn border rounded py-2 mb-2"
           >
             <img src="../../assets/img/mind.png" alt="" />
             <h4 class="h5 m-0 ml-2">推理遊戲</h4>
@@ -210,8 +214,7 @@
 </template>
 
 <script>
-import $ from "jquery";
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 
 export default {
   components: {
@@ -225,8 +228,8 @@ export default {
           delay: 5000,
         },
         navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
       },
       gamesOptions: {
@@ -267,10 +270,10 @@ export default {
       vm.isLoading = true;
       vm.$http.get(url).then((response) => {
         vm.topProducts = response.data.products.filter(
-          (product) => product.category == "策略"
+          (product) => product.category === '策略',
         );
         vm.newProducts = response.data.products.filter(
-          (product) => product.category == "派對"
+          (product) => product.category === '派對',
         );
         vm.isLoading = false;
       });

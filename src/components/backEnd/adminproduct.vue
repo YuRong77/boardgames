@@ -23,7 +23,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in product">
+          <tr v-for="item in product" :key="item">
             <td>
               <div
                 class="productImg mx-auto"
@@ -324,7 +324,7 @@
 </template>
 
 <script>
-import $ from "jquery";
+import $ from 'jquery';
 
 export default {
   data() {
@@ -332,7 +332,7 @@ export default {
       product: [],
       pagination: {},
       tempProduct: {},
-      modalTitle: "",
+      modalTitle: '',
       isNew: false,
       isLoading: false,
       smLoading: false,
@@ -354,38 +354,38 @@ export default {
         this.tempProduct = {};
         this.isNew = true;
       } else {
-        this.tempProduct = Object.assign({}, item);
+        this.tempProduct = { ...item };
         this.isNew = false;
       }
-      $("#productModal").modal("show");
+      $('#productModal').modal('show');
     },
     updateProduct() {
       const vm = this;
       let url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product`;
-      let httpMethod = "post";
+      let httpMethod = 'post';
       if (!vm.isNew) {
         url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-        httpMethod = "put";
+        httpMethod = 'put';
       }
       vm.$http[httpMethod](url, { data: vm.tempProduct }).then((response) => {
         if (response.data.success) {
-          $("#productModal").modal("hide");
+          $('#productModal').modal('hide');
           vm.getproduct();
         } else {
-          $("#productModal").modal("hide");
+          $('#productModal').modal('hide');
           vm.getProduct();
         }
       });
     },
     delModal(item) {
       this.tempProduct = item;
-      $("#delProductModal").modal("show");
+      $('#delProductModal').modal('show');
     },
     delProduct() {
       const vm = this;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/product/${vm.tempProduct.id}`;
-      vm.$http.delete(url).then((response) => {
-        $("#delProductModal").modal("hide");
+      vm.$http.delete(url).then(() => {
+        $('#delProductModal').modal('hide');
         vm.getproduct();
       });
     },
@@ -393,22 +393,22 @@ export default {
       const vm = this;
       const file = vm.$refs.files.files[0];
       const formData = new FormData();
-      formData.append("file-to-upload", file);
+      formData.append('file-to-upload', file);
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/upload`;
       vm.smLoading = true;
       vm.$http
         .post(url, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         })
         .then((response) => {
           vm.smLoading = false;
           if (response.data.success) {
-            vm.$set(vm.tempProduct, "imageUrl", response.data.imageUrl);
-            vm.$bus.$emit("message:push", "上傳成功", "success");
+            vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
+            vm.$bus.$emit('message:push', '上傳成功', 'success');
           } else {
-            vm.$bus.$emit("message:push", response.data.message, "danger");
+            vm.$bus.$emit('message:push', response.data.message, 'danger');
           }
         });
     },

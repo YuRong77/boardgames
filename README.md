@@ -15,7 +15,7 @@
 
 * [vue-axios](https://github.com/imcvampire/vue-axios#readme)
 
-* [vue-slick](https://github.com/staskjs/vue-slick#readme)
+* [vue-awesome-swiper](https://github.surmon.me/vue-awesome-swiper/)
 
 * [vue-loading-overlay](https://github.com/ankurk91/vue-loading-overlay)
 

@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: '/fungames/dist/'
-}
+  publicPath: '/fungames/dist/',
+};

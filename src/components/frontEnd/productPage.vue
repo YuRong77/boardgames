@@ -81,48 +81,30 @@
                 v-model.trim="search"
               />
             </div>
-
-
           </div>
         </div>
         <!--products-->
         <div class="col-md-9">
           <div class="row">
-            <div
-              class="col-md-6 col-lg-4 mb-4"
-              v-for="item in filterProducts"
-              :key="item.id"
-            >
+            <div class="col-md-6 col-lg-4 mb-4" v-for="item in filterProducts" :key="item.id">
               <div class="card border-1 shadow-sm">
                 <div
                   style="height: 180px; background-repeat:no-repeat; background-position: center"
                   :style="{ backgroundImage: `url(${item.imageUrl})` }"
                 ></div>
                 <div class="card-body">
-                  <span class="badge badge-secondary float-right ml-2">{{
-                    item.category
-                  }}</span>
+                  <span class="badge badge-secondary float-right ml-2">{{ item.category }}</span>
                   <h5 class="card-title text-dark">
                     {{ item.title }}
                   </h5>
-                  <div
-                    class="d-flex justify-content-between align-items-baseline"
-                  >
-                    <div
-                      class="h4 text-funOrange"
-                      v-if="item.price == item.origin_price"
-                    >
+                  <div class="d-flex justify-content-between align-items-baseline">
+                    <div class="h4 text-funOrange" v-if="item.price == item.origin_price">
                       ${{ item.origin_price }} 元
                     </div>
-                    <del
-                      class="h6 text-funOrange"
-                      v-if="item.price !== item.origin_price"
+                    <del class="h6 text-funOrange" v-if="item.price !== item.origin_price"
                       >{{ item.origin_price }} 元</del
                     >
-                    <div
-                      class="h4 text-funDarkOrange"
-                      v-if="item.price !== item.origin_price"
-                    >
+                    <div class="h4 text-funDarkOrange" v-if="item.price !== item.origin_price">
                       ${{ item.price }} 元
                     </div>
                   </div>
@@ -140,10 +122,7 @@
                     class="btn btn-funOrange btn-sm ml-auto text-light"
                     @click="addtoCart(item.id)"
                   >
-                    <i
-                      class="fas fa-spinner fa-spin"
-                      v-if="loadingItem === item.id"
-                    ></i>
+                    <i class="fas fa-spinner fa-spin" v-if="loadingItem === item.id"></i>
                     加入購物車
                   </button>
                 </div>
@@ -158,10 +137,7 @@
           >
             <div class="nav d-inline-block">
               <ul class="pagination">
-                <li
-                  class="page-item"
-                  :class="{ disabled: !pagination.has_pre }"
-                >
+                <li class="page-item" :class="{ disabled: !pagination.has_pre }">
                   <a
                     class="page-link"
                     href="#"
@@ -177,17 +153,9 @@
                   :key="page"
                   :class="{ active: pagination.current_page === page }"
                 >
-                  <a
-                    class="page-link "
-                    href="#"
-                    @click.prevent="getProducts(page)"
-                    >{{ page }}</a
-                  >
+                  <a class="page-link " href="#" @click.prevent="getProducts(page)">{{ page }}</a>
                 </li>
-                <li
-                  class="page-item"
-                  :class="{ disabled: !pagination.has_next }"
-                >
+                <li class="page-item" :class="{ disabled: !pagination.has_next }">
                   <a
                     class="page-link"
                     href="#"
@@ -207,8 +175,8 @@
 </template>
 
 <script>
-import $ from "jquery";
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import $ from 'jquery';
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 
 export default {
   components: {
@@ -223,27 +191,27 @@ export default {
           delay: 5000,
         },
         navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
       },
       products: [],
       allproducts: [],
-      loadingItem: "",
+      loadingItem: '',
       product: {},
       cart: {},
-      productCategory: "",
+      productCategory: '',
       filterProducts: [],
-      search: "",
+      search: '',
       pagination: {},
     };
   },
   watch: {
-    productCategory: function() {
+    productCategory() {
       this.filterproducts();
     },
-    search: function() {
-      (this.search) ? this.filterSearch():this.filterproducts();
+    search() {
+      !this.search ? this.filterproducts() : this.filterSearch();
     },
   },
   methods: {
@@ -267,20 +235,16 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       vm.$http.get(url).then((response) => {
         vm.allproducts = response.data.products;
-        if (vm.productCategory !== "") {
-          vm.filterProducts = vm.allproducts.filter(
-            (item) => item.category == vm.productCategory
-          );
+        if (vm.productCategory !== '') {
+          vm.filterProducts = vm.allproducts.filter((item) => item.category === vm.productCategory);
         } else {
           vm.filterProducts = vm.products;
         }
       });
     },
     filterSearch() {
-      let vm = this;
-      const searchAry = vm.allproducts.filter((item) =>
-        item.title.match(vm.search)
-      );
+      const vm = this;
+      const searchAry = vm.allproducts.filter((item) => item.title.match(vm.search));
       vm.filterProducts = searchAry;
     },
     addtoCart(id, qty = 1) {
@@ -291,11 +255,11 @@ export default {
         product_id: id,
         qty,
       };
-      vm.$http.post(url, { data: cart }).then((response) => {
-        vm.loadingItem = "";
+      vm.$http.post(url, { data: cart }).then(() => {
+        vm.loadingItem = '';
         vm.getCart();
-        $("#productModal").modal("hide");
-        vm.$bus.$emit("message:push", "加入成功", "funOrange");
+        $('#productModal').modal('hide');
+        vm.$bus.$emit('message:push', '加入成功', 'funOrange');
       });
     },
     getCart() {
@@ -308,7 +272,7 @@ export default {
   },
   created() {
     this.getProducts();
-    this.filterproducts()
+    this.filterproducts();
     this.getCart();
   },
 };

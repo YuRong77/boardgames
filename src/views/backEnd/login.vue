@@ -43,8 +43,8 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        password: "",
+        username: '',
+        password: '',
       },
     };
   },
@@ -54,7 +54,7 @@ export default {
       const url = `${process.env.VUE_APP_APIPATH}/admin/signin`;
       vm.$http.post(url, this.user).then((response) => {
         if (response.data.success) {
-          vm.$router.push("/admin/adminproduct");
+          vm.$router.push('/admin/adminproduct');
         }
       });
     },

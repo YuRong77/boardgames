@@ -40,18 +40,18 @@
 </template>
 
 <script>
-import $ from "jquery";
+import $ from 'jquery';
 
 export default {
   methods: {
     showmenu() {
-      $(".navmenu").toggleClass("show");
-      $(".menubackground").toggleClass("d-block");
+      $('.navmenu').toggleClass('show');
+      $('.menubackground').toggleClass('d-block');
     },
-    hidemenu(){
-      $(".navmenu").removeClass("show");
-      $(".menubackground").removeClass("d-block");
-    }
+    hidemenu() {
+      $('.navmenu').removeClass('show');
+      $('.menubackground').removeClass('d-block');
+    },
   },
 };
 </script>

@@ -1,6 +1,7 @@
 <template>
   <div class="message-alert ">
-    <div class="alert alert-dismissible text-center text-white h4 animate__animated animate__heartBeat"
+    <div class="alert alert-dismissible text-center
+    text-white h4 animate__animated animate__heartBeat"
       :class="'bg-' + item.status"
       v-for="(item, i) in messages" :key="i">
       {{ item.message }}
