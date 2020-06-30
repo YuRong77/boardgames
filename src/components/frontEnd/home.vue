@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-light pb-4">
-    <div class="container-lg bg-white shadow px-0 pb-5">
+  <div class="table-light py-4">
+    <div class="container-lg bg-white shadow-sm px-0 pb-5">
       <loading :active.sync="isLoading">
         <template slot="default">
           <img src="../../assets/img/loading.svg" alt="" />
@@ -16,8 +16,8 @@
         </swiper>
       </div>
       <!--category-->
-      <div class="category px-2 mb-4">
-        <h3 class="h4 font-weight-bolder mb-4 px-2">遊戲分類</h3>
+      <div class="category px-3 mb-4">
+        <h3 class="h4 font-weight-bolder mb-4">遊戲分類</h3>
         <div class="row px-3 mx-0">
           <div class="col-sm-6 col-md-3">
             <router-link
@@ -78,8 +78,8 @@
         </div>
       </div>
       <!--topgames-->
-      <div class="topgames px-2 mb-4">
-        <h3 class="h4 font-weight-bolder mb-4 px-2">熱門遊戲</h3>
+      <div class="topgames px-3 mb-4">
+        <h3 class="h4 font-weight-bolder mb-4">熱門遊戲</h3>
         <swiper class="swiper" :options="gamesOptions" v-if="topProducts.length">
           <swiper-slide v-for="item in topProducts" :key="item.id">
             <div class="card shadow-sm m-2">
@@ -118,9 +118,7 @@
         </swiper>
       </div>
       <!--coupon-->
-      <div
-        class="coupon bg-light d-flex justify-content-center align-items-center px-2 mb-4"
-      >
+      <div class="coupon bg-light d-flex justify-content-center align-items-center px-3 mb-4">
         <img src="../../assets/img/party2.png" alt="" />
         <div class="coupon-text">
           <h4 class="text-secondary">歡慶開幕</h4>
@@ -130,8 +128,8 @@
         </div>
       </div>
       <!--newgames-->
-      <div class="newgames px-2 mb-4">
-        <h3 class="h4 font-weight-bolder mb-4 px-2">最新商品</h3>
+      <div class="newgames px-3 mb-4">
+        <h3 class="h4 font-weight-bolder mb-4">最新商品</h3>
         <swiper class="swiper" :options="gamesOptions" v-if="newProducts.length">
           <swiper-slide v-for="item in newProducts" :key="item.id">
             <div class="card shadow-sm m-2">
@@ -171,8 +169,8 @@
       </div>
 
       <!--article-->
-      <div class="article px-2">
-        <h3 class="h4 font-weight-bolder mb-4 px-2">相關文章</h3>
+      <div class="article px-3">
+        <h3 class="h4 font-weight-bolder mb-4">相關文章</h3>
         <div class="row justify-content-around mx-0">
           <div class="col-md-5 border shadow-sm mb-2 px-0">
             <div class="article-img"></div>

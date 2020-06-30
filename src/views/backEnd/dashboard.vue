@@ -40,13 +40,6 @@
               >優惠活動</router-link
             >
           </li>
-          <li class="nav-item bg-funLighOrange border-bottom border-funOrange"
-          @click="hidesidebar">
-            <router-link class="nav-link text-funOrange" to="/admin/customer_order"
-              ><i class="fas fa-clipboard-list fa-3x d-block py-2"></i
-              >模擬訂單</router-link
-            >
-          </li>
           <li
             class="nav-item bg-funLighOrange border-bottom border-funOrange"
             @click.prevent="signout"

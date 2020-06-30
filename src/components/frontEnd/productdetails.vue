@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-light pb-4">
-    <div class="container-lg bg-white shadow px-0 pb-2">
+  <div class="bg-light py-4">
+    <div class="container-lg bg-white shadow-sm px-0 pb-2">
       <loading :active.sync="isLoading">
         <template slot="default">
           <img src="../../assets/img/loading.svg" alt="" />
         </template>
       </loading>
-      <div class="productdetails px-3">
+      <div class="productdetails px-3 ">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-white mb-0 p-3">
             <li class="breadcrumb-item">
@@ -29,7 +29,7 @@
         </nav>
         <div class="row mb-3">
           <div class="col-lg-6 mb-5">
-            <div class="rounded bg-white shadow h-100 p-3">
+            <div class="rounded bg-white h-100 border p-3">
               <div
                 style="height: 200px; background-repeat:no-repeat; background-position: center"
                 :style="{ backgroundImage: `url(${product.imageUrl})` }"
@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="col-lg-6 mb-5">
-            <div class="rounded bg-white shadow p-3">
+            <div class="rounded bg-white border p-3">
               <div class="title border-bottom d-flex justify-content-between mb-3">
                 <h3 class="font-weight-bold">{{ product.title }}</h3>
                 <p class="badge badge-secondary p-2">{{ product.category }}</p>
@@ -74,7 +74,7 @@
                 </select>
                 <button
                   class="btn btn-funDarkOrange w-100 mb-3"
-                  @click="addtoCart(product.id, product.num)"
+                  @click="addtoCart(product, product.num)"
                 >
                   加到購物車
                 </button>
@@ -108,7 +108,7 @@
           </div>
         </div>
         <!--relatedproducts-->
-        <div class="relatedproducts mb-5">
+        <div class="relatedproducts mb-3">
           <h3 class="h4 font-weight-bolder mb-4">你可能會喜歡</h3>
           <swiper class="swiper" :options="gamesOptions" v-if="relatedproducts.length">
             <swiper-slide v-for="item in relatedproducts" :key="item.id">
@@ -215,18 +215,8 @@ export default {
         );
       });
     },
-    addtoCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      vm.isLoading = true;
-      vm.$http.post(url, { data: cart }).then(() => {
-        vm.isLoading = false;
-        vm.$bus.$emit('message:push', '加入成功', 'funOrange');
-      });
+    addtoCart(addItem, qty = 1) {
+      this.$bus.$emit('addCart', addItem, qty);
     },
     toProduct(id) {
       this.$router.push(`/product/${id}`);

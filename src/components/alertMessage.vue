@@ -1,9 +1,12 @@
 <template>
   <div class="message-alert ">
-    <div class="alert alert-dismissible text-center
+    <div
+      class="alert alert-dismissible text-center
     text-white h4 animate__animated animate__heartBeat"
       :class="'bg-' + item.status"
-      v-for="(item, i) in messages" :key="i">
+      v-for="(item, i) in messages"
+      :key="i"
+    >
       {{ item.message }}
       <button type="button" class="close btn" @click="removeMessage(i)" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -61,7 +64,7 @@ export default {
   position: fixed;
   bottom: 130px;
   right: 30px;
-  margin:auto;
+  margin: auto;
   z-index: 100;
 }
 </style>

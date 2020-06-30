@@ -47,8 +47,8 @@ export default {
   data() {
     return {
       orders: {},
-      isNew: false,
       pagination: {},
+      isNew: false,
       isLoading: false,
     };
   },

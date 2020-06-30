@@ -3,10 +3,7 @@
     <Loading :active.sync="isLoading"></Loading>
 
     <div class="text-center">
-      <button
-        class="btn btn-funOrange text-light px-4"
-        @click="openCouponModal(true)"
-      >
+      <button class="btn btn-funOrange text-light px-4" @click="openCouponModal(true)">
         新增酷碰券
       </button>
     </div>
@@ -27,9 +24,7 @@
             <td>{{ item.percent }}%</td>
             <td>{{ item.due_date | date }}</td>
             <td>
-              <span v-if="item.is_enabled === 1" class="text-success"
-                >啟用</span
-              >
+              <span v-if="item.is_enabled === 1" class="text-success">啟用</span>
               <span v-else class="text-muted">未起用</span>
             </td>
             <td>
@@ -39,10 +34,7 @@
               >
                 編輯
               </button>
-              <button
-                class="btn btn-sm text-funDarkOrange ml-2"
-                @click="delModal(item)"
-              >
+              <button class="btn btn-sm text-funDarkOrange ml-2" @click="delModal(item)">
                 <i class="far fa-trash-alt btn-sm btn-funDarkOrange "></i>
               </button>
             </td>
@@ -64,20 +56,11 @@
           <div class="modal-header bg-funOrange">
             <h5
               class="modal-title text-light"
-              v-if="
-                isNew
-                  ? (modalTitle = '新增酷碰券')
-                  : (modalTitle = '編輯酷碰券')
-              "
+              v-if="isNew ? (modalTitle = '新增酷碰券') : (modalTitle = '編輯酷碰券')"
             >
               {{ modalTitle }}
             </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -104,12 +87,7 @@
             </div>
             <div class="form-group">
               <label for="due_date">到期日</label>
-              <input
-                type="date"
-                class="form-control"
-                id="due_date"
-                v-model="due_date"
-              />
+              <input type="date" class="form-control" id="due_date" v-model="due_date" />
             </div>
             <div class="form-group">
               <label for="price">折扣百分比</label>
@@ -138,11 +116,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-funGray"
-              data-dismiss="modal"
-            >
+            <button type="button" class="btn btn-funGray" data-dismiss="modal">
               取消
             </button>
             <button type="button" class="btn btn-funOrange text-light " @click="updateCoupon">
@@ -167,12 +141,7 @@
             <h5 class="modal-title">
               <span>刪除產品</span>
             </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -182,11 +151,7 @@
             優惠券 (刪除後無法恢復)。
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              data-dismiss="modal"
-            >
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
               取消
             </button>
             <button type="button" class="btn btn-funDarkOrange" @click="delCoupon">
@@ -203,22 +168,19 @@
 import $ from 'jquery';
 
 export default {
-  props: {
-    config: Object,
-  },
   data() {
     return {
       coupons: {},
       tempCoupon: {
         title: '',
+        code: '',
         is_enabled: 0,
         percent: 100,
         due_date: 0,
-        code: '',
       },
       due_date: new Date(),
-      isNew: false,
       modalTitle: '',
+      isNew: false,
       isLoading: false,
     };
   },
@@ -238,9 +200,7 @@ export default {
         vm.tempCoupon = {};
       } else {
         vm.tempCoupon = { ...item };
-        const dateAndTime = new Date(vm.tempCoupon.due_date * 1000)
-          .toISOString()
-          .split('T');
+        const dateAndTime = new Date(vm.tempCoupon.due_date * 1000).toISOString().split('T');
         vm.due_date = dateAndTime[0];
       }
     },
@@ -297,7 +257,7 @@ export default {
 .couponTable td {
   vertical-align: middle;
 }
-.hov-txt:hover{
-  color:white;
+.hov-txt:hover {
+  color: white;
 }
 </style>

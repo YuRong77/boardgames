@@ -2,10 +2,7 @@
   <div class="product">
     <loading :active.sync="isLoading"></loading>
     <div class="text-center">
-      <button
-        class="btn btn-funOrange px-4 text-light"
-        @click="openModal(true)"
-      >
+      <button class="btn btn-funOrange px-4 text-light" @click="openModal(true)">
         建立新產品
       </button>
     </div>
@@ -23,7 +20,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in product" :key="item">
+          <tr v-for="item in product" :key="item.id">
             <td>
               <div
                 class="productImg mx-auto"
@@ -46,10 +43,7 @@
               >
                 編輯
               </button>
-              <button
-                class="btn text-funDarkOrange btn-sm ml-2"
-                @click="delModal(item)"
-              >
+              <button class="btn text-funDarkOrange btn-sm ml-2" @click="delModal(item)">
                 <i class="far fa-trash-alt btn-sm btn-funDarkOrange"></i>
               </button>
             </td>
@@ -77,9 +71,7 @@
             :key="page"
             :class="{ active: pagination.current_page === page }"
           >
-            <a class="page-link " href="#" @click.prevent="getproduct(page)">{{
-              page
-            }}</a>
+            <a class="page-link " href="#" @click.prevent="getproduct(page)">{{ page }}</a>
           </li>
           <li class="page-item" :class="{ disabled: !pagination.has_next }">
             <a
@@ -107,19 +99,11 @@
         <div class="modal-content border-0">
           <div class="modal-header bg-funOrange text-white">
             <h5 class="modal-title" id="exampleModalLabel">
-              <span
-                v-if="
-                  isNew ? (modalTitle = '新增產品') : (modalTitle = '編輯產品')
-                "
-                >{{ modalTitle }}</span
-              >
+              <span v-if="isNew ? (modalTitle = '新增產品') : (modalTitle = '編輯產品')">{{
+                modalTitle
+              }}</span>
             </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -254,18 +238,10 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              data-dismiss="modal"
-            >
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
               取消
             </button>
-            <button
-              type="button"
-              class="btn btn-funOrange text-light"
-              @click="updateProduct"
-            >
+            <button type="button" class="btn btn-funOrange text-light" @click="updateProduct">
               確認
             </button>
           </div>
@@ -287,12 +263,7 @@
             <h5 class="modal-title">
               <span>刪除產品</span>
             </h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -302,18 +273,10 @@
             商品 (刪除後無法恢復)。
           </div>
           <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              data-dismiss="modal"
-            >
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">
               取消
             </button>
-            <button
-              type="button"
-              class="btn btn-funDarkOrange"
-              @click="delProduct"
-            >
+            <button type="button" class="btn btn-funDarkOrange" @click="delProduct">
               確認刪除
             </button>
           </div>

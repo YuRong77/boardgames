@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-light pb-4">
-    <div class="container-lg bg-white shadow px-0 pb-2">
+  <div class="table-light py-4">
+    <div class="container-lg bg-white shadow-sm px-0 pb-2">
       <loading :active.sync="isLoading">
         <template slot="default">
           <img src="../../assets/img/loading.svg" alt="" />
@@ -121,7 +121,7 @@
                     <button
                       type="button"
                       class="btn btn-funOrange btn-sm ml-auto text-light"
-                      @click="addtoCart(item.id)"
+                      @click="addtoCart(item)"
                     >
                       <i class="fas fa-spinner fa-spin" v-if="loadingItem === item.id"></i>
                       加入購物車
@@ -177,7 +177,6 @@
 </template>
 
 <script>
-import $ from 'jquery';
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 
 export default {
@@ -199,13 +198,13 @@ export default {
       },
       products: [],
       allproducts: [],
-      loadingItem: '',
-      product: {},
-      cart: {},
-      productCategory: '',
       filterProducts: [],
-      search: '',
+      product: {},
+      storageCart: [],
       pagination: {},
+      loadingItem: '',
+      productCategory: '',
+      search: '',
     };
   },
   watch: {
@@ -249,38 +248,18 @@ export default {
       const searchAry = vm.allproducts.filter((item) => item.title.match(vm.search));
       vm.filterProducts = searchAry;
     },
-    addtoCart(id, qty = 1) {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.loadingItem = id;
-      const cart = {
-        product_id: id,
-        qty,
-      };
-      vm.$http.post(url, { data: cart }).then(() => {
-        vm.loadingItem = '';
-        vm.getCart();
-        $('#productModal').modal('hide');
-        vm.$bus.$emit('message:push', '加入成功', 'funOrange');
-      });
-    },
-    getCart() {
-      const vm = this;
-      const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.$http.get(url).then((response) => {
-        vm.cart = response.data.data;
-      });
+    addtoCart(addItem, qty = 1) {
+      this.$bus.$emit('addCart', addItem, qty);
     },
   },
   created() {
     this.getProducts();
     this.filterproducts();
-    this.getCart();
   },
 };
 </script>
 
-<style scoped>
+<style>
 .swiper-container {
   --swiper-navigation-color: white;
   --swiper-navigation-size: 30px;
@@ -301,7 +280,6 @@ export default {
   position: sticky;
   top: 90px;
 }
-
 @media (max-width: 420px) {
   .productbanner .bannerimg3 {
     background-image: url(../../assets/img/phonebanner2.png);

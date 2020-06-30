@@ -34,9 +34,14 @@ const routes = [
         component: () => import('../components/frontEnd/ShoppingCart.vue'),
       },
       {
+        path: 'customer_form',
+        name: 'CustomerForm',
+        component: () => import('../components/frontEnd/CustomerForm.vue'),
+      },
+      {
         path: 'customer_checkout/:orderId',
         name: 'CustomerCheckout',
-        component: () => import('../components/CustomerCheckout.vue'),
+        component: () => import('../components/frontEnd/CustomerCheckout.vue'),
       },
     ],
   },
@@ -67,16 +72,6 @@ const routes = [
         name: 'Coupon',
         meta: { requiresAuth: true },
         component: () => import('../components/backEnd/Coupon.vue'),
-      },
-      {
-        path: 'customer_order',
-        name: 'CustomerOrder',
-        component: () => import('../components/backEnd/CustomerOrder.vue'),
-      },
-      {
-        path: 'customer_checkout/:orderId',
-        name: 'TextCustomerCheckout',
-        component: () => import('../components/CustomerCheckout.vue'),
       },
     ],
   },
