@@ -58,7 +58,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .header {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   z-index: 20;
@@ -75,15 +75,15 @@ export default {
     background: white;
     transition: all 0.5s;
     padding: 20px 0;
-  }
-  .navmenu li a {
-    display: block;
-    width: 100%;
-    height: 60px;
-    text-align: center;
-  }
-  .navmenu.show {
-    transform: translateX(0);
+    &.show {
+      transform: translateX(0);
+    }
+    & li a {
+      display: block;
+      width: 100%;
+      height: 60px;
+      text-align: center;
+    }
   }
   .menubackground {
     width: 100%;

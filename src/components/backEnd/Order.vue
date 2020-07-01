@@ -84,11 +84,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
 .orderTable {
   white-space: nowrap;
-}
-.orderTable td {
-  vertical-align: middle;
+  & td {
+    vertical-align: middle;
+  }
 }
 </style>

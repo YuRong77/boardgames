@@ -88,7 +88,7 @@
           <div class="col-md-9">
             <div class="row">
               <div class="col-md-6 col-lg-4 mb-4" v-for="item in filterProducts" :key="item.id">
-                <div class="card border-1 shadow-sm">
+                <div class="gamescard card border-1 shadow-sm" @click="getProduct(item.id)">
                   <div
                     style="height: 180px; background-repeat:no-repeat; background-position: center"
                     :style="{ backgroundImage: `url(${item.imageUrl})` }"
@@ -102,26 +102,26 @@
                       <div class="h4 text-funOrange" v-if="item.price == item.origin_price">
                         ${{ item.origin_price }} 元
                       </div>
-                      <del class="h6 text-funOrange" v-if="item.price !== item.origin_price"
-                        >{{ item.origin_price }} 元</del
-                      >
                       <div class="h4 text-funDarkOrange" v-if="item.price !== item.origin_price">
                         ${{ item.price }} 元
                       </div>
+                      <del class="h6 text-funOrange" v-if="item.price !== item.origin_price"
+                        >{{ item.origin_price }} 元</del
+                      >
                     </div>
                   </div>
                   <div class="card-footer d-flex">
                     <button
                       type="button"
                       class="btn btn-outline-secondary btn-sm px-3"
-                      @click="getProduct(item.id)"
+                      @click.stop="getProduct(item.id)"
                     >
                       詳細內容
                     </button>
                     <button
                       type="button"
                       class="btn btn-funOrange btn-sm ml-auto text-light"
-                      @click="addtoCart(item)"
+                      @click.stop="addtoCart(item)"
                     >
                       <i class="fas fa-spinner fa-spin" v-if="loadingItem === item.id"></i>
                       加入購物車
@@ -259,33 +259,39 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .swiper-container {
   --swiper-navigation-color: white;
   --swiper-navigation-size: 30px;
 }
-.productbanner .bannerimg3 {
-  background-image: url(../../assets/img/banner2.png);
-  background-position: center center;
-  background-size: cover;
-  height: 450px;
-}
-.productbanner .bannerimg4 {
-  background-image: url(../../assets/img/banner1.png);
-  background-position: center center;
-  background-size: cover;
-  height: 450px;
+.productbanner {
+  & .bannerimg3 {
+    background-image: url(../../assets/img/banner3.png);
+    background-position: center center;
+    background-size: cover;
+    height: 300px;
+  }
+  & .bannerimg4 {
+    background-image: url(../../assets/img/banner4.png);
+    background-position: center center;
+    background-size: cover;
+    height: 300px;
+  }
 }
 .sticky-list {
   position: sticky;
   top: 90px;
 }
 @media (max-width: 420px) {
-  .productbanner .bannerimg3 {
-    background-image: url(../../assets/img/phonebanner2.png);
-  }
-  .productbanner .bannerimg4 {
-    background-image: url(../../assets/img/phonebanner1.png);
+  .productbanner {
+    & .bannerimg3 {
+      background-image: url(../../assets/img/phonebanner3.png);
+      height: 400px;
+    }
+    & .bannerimg4 {
+      background-image: url(../../assets/img/phonebanner4.png);
+      height: 400px;
+    }
   }
 }
 </style>

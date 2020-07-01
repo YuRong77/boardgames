@@ -382,7 +382,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
 .productImg {
   height: 150px;
   background-repeat: no-repeat;
@@ -390,9 +390,9 @@ export default {
 }
 .productTable {
   white-space: nowrap;
-}
-.productTable td {
-  vertical-align: middle;
+  & td {
+    vertical-align: middle;
+  }
 }
 .hov-txt:hover {
   color: white;

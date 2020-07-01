@@ -2,7 +2,7 @@
   <div class="message-alert ">
     <div
       class="alert alert-dismissible text-center
-    text-white h4 animate__animated animate__heartBeat"
+    text-white h5 animate__animated animate__heartBeat"
       :class="'bg-' + item.status"
       v-for="(item, i) in messages"
       :key="i"
@@ -43,7 +43,7 @@ export default {
             vm.messages.splice(i, 1);
           }
         });
-      }, 2500);
+      }, 1200);
     },
   },
   created() {

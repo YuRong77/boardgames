@@ -9,8 +9,8 @@
       <!--banner-->
       <div class="banner px-0 mb-4">
         <swiper class="swiper" :options="bannerOptions">
-          <swiper-slide><div class="bannerimg1"></div></swiper-slide>
-          <swiper-slide><div class="bannerimg2"></div></swiper-slide>
+          <swiper-slide><div class="bannerimg1" @click="goShop"></div></swiper-slide>
+          <swiper-slide><div class="bannerimg2" @click="goShop"></div></swiper-slide>
           <div class="swiper-button-prev" slot="button-prev"></div>
           <div class="swiper-button-next" slot="button-next"></div>
         </swiper>
@@ -82,7 +82,7 @@
         <h3 class="h4 font-weight-bolder mb-4">熱門遊戲</h3>
         <swiper class="swiper" :options="gamesOptions" v-if="topProducts.length">
           <swiper-slide v-for="item in topProducts" :key="item.id">
-            <div class="card shadow-sm m-2">
+            <div class="gamescard card shadow-sm m-2" @click="getProduct(item.id)">
               <div
                 style="height: 180px; background-repeat:no-repeat; background-position: center"
                 :style="{ backgroundImage: `url(${item.imageUrl})` }"
@@ -95,12 +95,12 @@
                   <div class="h4 text-funOrange" v-if="item.price == item.origin_price">
                     ${{ item.origin_price }} 元
                   </div>
-                  <del class="h6 text-funOrange" v-if="item.price !== item.origin_price"
-                    >{{ item.origin_price }} 元</del
-                  >
                   <div class="h4 text-funDarkOrange" v-if="item.price !== item.origin_price">
                     ${{ item.price }} 元
                   </div>
+                  <del class="h6 text-funOrange" v-if="item.price !== item.origin_price"
+                    >{{ item.origin_price }} 元</del
+                  >
                 </div>
               </div>
               <div class="card-footer d-flex">
@@ -132,7 +132,7 @@
         <h3 class="h4 font-weight-bolder mb-4">最新商品</h3>
         <swiper class="swiper" :options="gamesOptions" v-if="newProducts.length">
           <swiper-slide v-for="item in newProducts" :key="item.id">
-            <div class="card shadow-sm m-2">
+            <div class="gamescard card shadow-sm m-2" @click="getProduct(item.id)">
               <div
                 style="height: 180px; background-repeat:no-repeat; background-position: center"
                 :style="{ backgroundImage: `url(${item.imageUrl})` }"
@@ -145,12 +145,12 @@
                   <div class="h4 text-funOrange" v-if="item.price == item.origin_price">
                     ${{ item.origin_price }} 元
                   </div>
-                  <del class="h6 text-funOrange" v-if="item.price !== item.origin_price"
-                    >{{ item.origin_price }} 元</del
-                  >
                   <div class="h4 text-funDarkOrange" v-if="item.price !== item.origin_price">
                     ${{ item.price }} 元
                   </div>
+                  <del class="h6 text-funOrange" v-if="item.price !== item.origin_price"
+                    >{{ item.origin_price }} 元</del
+                  >
                 </div>
               </div>
               <div class="card-footer d-flex">
@@ -172,22 +172,26 @@
       <div class="article px-3">
         <h3 class="h4 font-weight-bolder mb-4">相關文章</h3>
         <div class="row justify-content-around mx-0">
-          <div class="col-md-5 border shadow-sm mb-2 px-0">
-            <div class="article-img"></div>
-            <div class="article-text p-3">
-              <h4 class="h5">
-                新手一定要知道!《狼人殺》快速上手的五個 小技巧!!
-              </h4>
-              <a href="#">繼續閱讀...</a>
+          <div class="col-md-6 mb-2">
+            <div class="border h-100">
+              <div class="article-img"></div>
+              <div class="article-text p-3">
+                <h4 class="h5">
+                  新手一定要知道!《狼人殺》快速上手的五個實用小技巧!!
+                </h4>
+                <a href="#">繼續閱讀...</a>
+              </div>
             </div>
           </div>
-          <div class="col-md-5 border shadow-sm mb-2 px-0">
-            <div class="article2-img"></div>
-            <div class="article-text p-3">
-              <h4 class="h5">
-                璀璨寶石》最詳細的規則說明，讓你一次 搞懂遊戲機制。
-              </h4>
-              <a href="#">繼續閱讀...</a>
+          <div class="col-md-6 mb-2">
+            <div class="border">
+              <div class="article2-img"></div>
+              <div class="article-text p-3">
+                <h4 class="h5">
+                 《璀璨寶石》最詳細的規則說明，讓你一次 搞懂遊戲機制。
+                </h4>
+                <a href="#">繼續閱讀...</a>
+              </div>
             </div>
           </div>
         </div>
@@ -260,6 +264,9 @@ export default {
     getProduct(id) {
       this.$router.push(`/product/${id}`);
     },
+    goShop() {
+      this.$router.push({ path: '/product', query: { productCategory: '' } });
+    },
   },
   created() {
     this.getProducts();
@@ -267,22 +274,27 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.banner:hover {
+  cursor: pointer;
+}
 .swiper-container {
   --swiper-navigation-color: white;
   --swiper-navigation-size: 30px;
 }
-.banner .bannerimg1 {
-  background-image: url(../../assets/img/banner1.png);
-  background-position: center center;
-  background-size: cover;
-  height: 450px;
-}
-.banner .bannerimg2 {
-  background-image: url(../../assets/img/banner2.png);
-  background-position: center center;
-  background-size: cover;
-  height: 450px;
+.banner {
+   & .bannerimg1 {
+     background-image: url(../../assets/img/banner1.png);
+     background-position: center center;
+     background-size: cover;
+     height: 450px;
+   }
+   & .bannerimg2 {
+     background-image: url(../../assets/img/banner2.png);
+     background-position: center center;
+     background-size: cover;
+     height: 450px;
+   }
 }
 .category a:hover {
   background: #f8f8f8;
@@ -305,11 +317,13 @@ export default {
   }
 }
 @media (max-width: 420px) {
-  .banner .bannerimg1 {
-    background-image: url(../../assets/img/phonebanner1.png);
-  }
-  .banner .bannerimg2 {
-    background-image: url(../../assets/img/phonebanner2.png);
+  .banner {
+    & .bannerimg1 {
+      background-image: url(../../assets/img/phonebanner1.png);
+    }
+    & .bannerimg2 {
+      background-image: url(../../assets/img/phonebanner2.png);
+    }
   }
 }
 </style>

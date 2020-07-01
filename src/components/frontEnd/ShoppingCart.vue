@@ -139,7 +139,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -148,14 +148,16 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 @media (max-width: 450px) {
-  .cartTable thead {
-    display: none;
-  }
-  .cartTable tr {
-    border-bottom: 1px solid whitesmoke;
-  }
-  .cartTable td {
-    display: inline-block;
+  .cartTable {
+    & thead {
+      display: none;
+    }
+    & tr {
+      border-bottom: 1px solid whitesmoke;
+    }
+    & td {
+      display: inline-block;
+    }
   }
   .tableQty {
     width: 100%;

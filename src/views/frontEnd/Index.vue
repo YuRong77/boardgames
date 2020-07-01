@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <router-view class="viewContent"/>
+    <router-view class="view-content"/>
     <Footer />
     <Cart />
     <alert />
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style>
-.viewContent {
+.view-content {
   margin-top: 80px;
   min-height: calc(100vh - 80px - 160px);
 }

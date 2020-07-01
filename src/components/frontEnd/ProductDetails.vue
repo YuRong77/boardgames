@@ -112,7 +112,7 @@
           <h3 class="h4 font-weight-bolder mb-4">你可能會喜歡</h3>
           <swiper class="swiper" :options="gamesOptions" v-if="relatedproducts.length">
             <swiper-slide v-for="item in relatedproducts" :key="item.id">
-              <div class="card shadow-sm m-2">
+              <div class="gamescard card shadow-sm m-2" @click="toProduct(item.id)">
                 <div
                   style="height: 180px; background-repeat:no-repeat; background-position: center"
                   :style="{ backgroundImage: `url(${item.imageUrl})` }"
@@ -125,12 +125,12 @@
                     <div class="h4 text-funOrange" v-if="item.price == item.origin_price">
                       ${{ item.origin_price }} 元
                     </div>
-                    <del class="h6 text-funOrange" v-if="item.price !== item.origin_price"
-                      >{{ item.origin_price }} 元</del
-                    >
                     <div class="h4 text-funDarkOrange" v-if="item.price !== item.origin_price">
                       ${{ item.price }} 元
                     </div>
+                    <del class="h6 text-funOrange" v-if="item.price !== item.origin_price"
+                      >{{ item.origin_price }} 元</del
+                    >
                   </div>
                 </div>
                 <div class="card-footer d-flex">
@@ -203,8 +203,8 @@ export default {
       vm.$http.get(url).then((response) => {
         vm.product = response.data.product;
         vm.product.num = 1;
+        vm.getProducts();
       });
-      vm.getProducts();
     },
     getProducts() {
       const vm = this;
@@ -223,9 +223,8 @@ export default {
       this.reload();
     },
   },
-  mounted() {
+  created() {
     this.getProduct();
-    this.getProducts();
   },
 };
 </script>

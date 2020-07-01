@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-light pb-4">
+  <div class="bg-light py-4">
     <div class="container-lg  px-0 pb-2">
       <loading :active.sync="isLoading">
         <template slot="default">
           <img src="../../assets/img/loading.svg" alt="" />
         </template>
       </loading>
-      <div class="row justify-content-center py-3 mx-0">
+      <div class="row justify-content-center mx-0">
         <div class="col-lg-5 mb-3">
           <div class="rounded bg-white shadow-sm h-100 p-4">
             <h3 class="text-center font-weight-bold mb-5">購物清單</h3>

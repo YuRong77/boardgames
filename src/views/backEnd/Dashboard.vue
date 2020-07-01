@@ -88,7 +88,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .navbar {
   height: 60px;
   z-index: 10;
@@ -112,9 +112,9 @@ export default {
 @media (max-width: 991px) {
   .sidebar {
     transform: translateX(-150px);
-  }
-  .sidebar.show {
-    transform: translateX(0);
+    &.show {
+      transform: translateX(0);
+    }
   }
   .productlist {
     margin-left: 0;

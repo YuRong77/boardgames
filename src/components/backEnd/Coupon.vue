@@ -250,12 +250,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
 .couponTable {
   white-space: nowrap;
-}
-.couponTable td {
-  vertical-align: middle;
+  & td {
+    vertical-align: middle;
+  }
 }
 .hov-txt:hover {
   color: white;

@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-light py-1">
+  <div class="bg-light py-4">
     <div class="container-lg  px-0 pb-2">
       <loading :active.sync="isLoading">
         <template slot="default">
           <img src="../../assets/img/loading.svg" alt="" />
         </template>
       </loading>
-      <div class="my-5 row justify-content-center mx-0">
+      <div class="row justify-content-center mx-0">
         <div class="col-lg-6 rounded bg-white shadow-sm p-4">
           <h3 class="text-center font-weight-bold  mb-4" v-if="!order.is_paid">
             付款確認

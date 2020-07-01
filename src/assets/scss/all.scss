@@ -10,3 +10,10 @@ body {
 img {
   max-width: 100%;
 }
+.gamescard {
+  transition: all .3s;
+}
+.gamescard:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+}

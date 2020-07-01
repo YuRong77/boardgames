@@ -21,7 +21,7 @@
                 <i class="fas fa-spinner fa-pulse" v-if="item.product.id == loadingItem"></i>
               </button>
             </td>
-            <td class="align-middle pr-4">
+            <td class="align-middle" width="150px">
               <p class="m-0">{{ item.product.title }}</p>
               <small>{{ item.qty }} / {{ item.product.unit }}</small>
             </td>
@@ -130,7 +130,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .shoppingCartBtn {
   position: fixed;
   right: 50px;
@@ -140,13 +140,13 @@ export default {
   border: 2px solid;
   border-radius: 50%;
   transition: all 0.5s;
-}
-.shoppingCartBtn:hover {
-  background: #ee8133 !important;
-}
-.shoppingCartBtn:hover.shoppingCartBtn i,
-.shoppingCartBtn:hover.shoppingCartBtn p {
-  color: white !important;
+  &:hover {
+    background: #ee8133 !important;
+    &.shoppingCartBtn i,
+    &.shoppingCartBtn p {
+      color: white !important;
+    }
+  }
 }
 .shoppingCart {
   position: fixed;
@@ -157,17 +157,17 @@ export default {
   height: 360px;
   display: none;
   z-index: 101;
+  &.show {
+    display: block;
+  }
+  & table {
+    display: block;
+    width: 100%;
+    height: 200px;
+  }
 }
 .animate__animated.animate__rubberBand {
   --animate-duration: 0.7s;
-}
-.shoppingCart table {
-  display: block;
-  width: 100%;
-  height: 200px;
-}
-.shoppingCart.show {
-  display: block;
 }
 .cartnum {
   position: absolute;
