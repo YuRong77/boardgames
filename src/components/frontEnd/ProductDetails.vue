@@ -156,7 +156,6 @@
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 
 export default {
-  inject: ['reload'],
   components: {
     Swiper,
     SwiperSlide,
@@ -192,7 +191,7 @@ export default {
   },
   watch: {
     $route() {
-      this.reload(); // 相關產品上一頁重整
+      this.getProduct();
     },
   },
   methods: {
@@ -200,9 +199,11 @@ export default {
       const vm = this;
       const { id } = this.$route.params;
       const url = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${id}`;
+      vm.isLoading = true;
       vm.$http.get(url).then((response) => {
         vm.product = response.data.product;
         vm.product.num = 1;
+        vm.isLoading = false;
         vm.getProducts();
       });
     },
@@ -220,7 +221,6 @@ export default {
     },
     toProduct(id) {
       this.$router.push(`/product/${id}`);
-      this.reload();
     },
   },
   created() {
