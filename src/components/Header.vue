@@ -22,7 +22,7 @@
           </li>
           <li @click="hidemenu">
             <a
-              href="https://github.com/YuRong77/fungames"
+              href="https://github.com/YuRong77/boardgames"
               target="_blank"
               class="text-secondary px-4"
               >關於</a
