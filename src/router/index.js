@@ -22,26 +22,41 @@ const routes = [
         path: 'product',
         name: 'Product',
         component: () => import('../components/frontEnd/ProductPage.vue'),
+        meta: {
+          title: 'Fun桌遊 - 商品',
+        },
       },
       {
         path: 'product/:id',
         name: 'ProductDetails',
         component: () => import('../components/frontEnd/ProductDetails.vue'),
+        meta: {
+          title: 'Fun桌遊 - 商品',
+        },
       },
       {
         path: 'shoppingcart',
         name: 'ShoppingCart',
         component: () => import('../components/frontEnd/ShoppingCart.vue'),
+        meta: {
+          title: 'Fun桌遊 - 購物車',
+        },
       },
       {
         path: 'customer_form',
         name: 'CustomerForm',
         component: () => import('../components/frontEnd/CustomerForm.vue'),
+        meta: {
+          title: 'Fun桌遊 - 商品結帳',
+        },
       },
       {
         path: 'customer_checkout/:orderId',
         name: 'CustomerCheckout',
         component: () => import('../components/frontEnd/CustomerCheckout.vue'),
+        meta: {
+          title: 'Fun桌遊 - 商品結帳',
+        },
       },
     ],
   },
