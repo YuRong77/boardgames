@@ -7,9 +7,9 @@
             <div class="col-sm-6 mb-3">
               <ul class="navbar-nav text-white">
                 <li>關於Fun桌遊</li>
-                <li><a href="" class="text-white">加入我們</a></li>
-                <li><a href="" class="text-white">相關條款</a></li>
-                <li><a href="" class="text-white">隱私權政策</a></li>
+                <li><a href="#" class="text-white">加入我們</a></li>
+                <li><a href="#" class="text-white">相關條款</a></li>
+                <li><a href="#" class="text-white">隱私權政策</a></li>
               </ul>
             </div>
             <div class="col-sm-6 mb-3">

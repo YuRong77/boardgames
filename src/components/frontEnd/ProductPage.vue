@@ -1,5 +1,5 @@
 <template>
-  <div class="table-light py-4">
+  <div class="table-light pt-lg-4">
     <div class="container-lg bg-white shadow-sm px-0 pb-2">
       <loading :active.sync="isLoading">
         <template slot="default">
@@ -189,7 +189,7 @@ export default {
       isLoading: false,
       bannerOptions: {
         autoplay: {
-          delay: 5000,
+          delay: 6000,
         },
         navigation: {
           nextEl: '.swiper-button-next',

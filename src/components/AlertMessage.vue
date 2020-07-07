@@ -67,4 +67,14 @@ export default {
   margin: auto;
   z-index: 100;
 }
+@media(max-width: 768px){
+  .message-alert {
+    position: fixed;
+    top: 100px;
+    right: 50%;
+    transform: translateX(50%);
+    margin: auto;
+    z-index: 100;
+  }
+}
 </style>

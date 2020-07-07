@@ -66,10 +66,10 @@ export default {
 
 @media (max-width: 767px) {
   .navmenu {
-    transform: translateX(-200px);
+    transform: translateX(200px);
     position: absolute;
     top: 80px;
-    left: 0;
+    right: 0;
     height: 100vh;
     width: 200px;
     background: white;

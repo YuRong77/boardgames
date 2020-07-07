@@ -1,6 +1,6 @@
 <template>
-  <div class="table-light py-4">
-    <div class="container-lg bg-white shadow-sm px-0 pb-5">
+  <div class="table-light pt-lg-4">
+    <div class="container-lg bg-white shadow-sm px-0 pb-4">
       <loading :active.sync="isLoading">
         <template slot="default">
           <img src="../../assets/img/loading.svg" alt="" />
@@ -212,7 +212,7 @@ export default {
     return {
       bannerOptions: {
         autoplay: {
-          delay: 5000,
+          delay: 6000,
         },
         navigation: {
           nextEl: '.swiper-button-next',
