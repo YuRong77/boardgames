@@ -100,10 +100,10 @@
                     </h5>
                     <div class="d-flex justify-content-between align-items-baseline">
                       <div class="h4 text-funOrange" v-if="item.price == item.origin_price">
-                        ${{ item.origin_price }} 元
+                        {{ item.origin_price | currency}} 元
                       </div>
                       <div class="h4 text-funDarkOrange" v-if="item.price !== item.origin_price">
-                        ${{ item.price }} 元
+                        {{ item.price | currency}} 元
                       </div>
                       <del class="h6 text-funOrange" v-if="item.price !== item.origin_price"
                         >{{ item.origin_price }} 元</del

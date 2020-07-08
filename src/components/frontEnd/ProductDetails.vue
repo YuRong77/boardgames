@@ -56,16 +56,16 @@
                   v-if="product.price == product.origin_price"
                   class="h5 text-funOrange font-weight-bold"
                 >
-                  NT${{ product.origin_price }}
+                  NT{{ product.origin_price | currency}}
                 </div>
                 <del v-if="product.price !== product.origin_price" class="h6 text-funOrange">
-                  原價NT${{ product.origin_price }}</del
+                  原價NT{{ product.origin_price | currency}}</del
                 >
                 <div
                   v-if="product.price !== product.origin_price"
                   class="h4 text-funDarkOrange font-weight-bold"
                 >
-                  特價NT${{ product.price }}
+                  特價NT{{ product.price | currency}}
                 </div>
                 <select name="" class="form-control my-3" v-model="product.num">
                   <option :value="num" v-for="num in 10" :key="num">
