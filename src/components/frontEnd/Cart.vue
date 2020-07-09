@@ -140,6 +140,7 @@ export default {
   border: 2px solid;
   border-radius: 50%;
   transition: all 0.5s;
+  z-index: 100;
   &:hover {
     background: #ee8133 !important;
     &.shoppingCartBtn i,
