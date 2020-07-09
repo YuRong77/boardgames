@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-light py-4">
+  <div class="bg-light">
     <div class="container-lg bg-white shadow-sm px-0 pb-2">
       <loading :active.sync="isLoading">
         <template slot="default">
@@ -8,7 +8,7 @@
       </loading>
       <div class="productdetails px-3 ">
         <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-white mb-0 p-3">
+          <ol class="breadcrumb bg-white pt-4 m-0">
             <li class="breadcrumb-item">
               <router-link to="/" class="text-funOrange">首頁</router-link>
             </li>

@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="container-fluid bg-funGray vh-100 d-flex justify-content-center"
-  >
+  <div class="container-fluid bg-funGray vh-100 d-flex justify-content-center">
     <div class="login">
       <div class="login_logo mb-3">
         <img src="../../assets/img/logo2.svg" alt="" />
@@ -29,11 +27,11 @@
           確認
         </button>
       </form>
-    </div>
-    <div class="previous">
-      <router-link to="/" class="btn">
-      <i class="fas fa-undo-alt bg-funDarkOrange text-white rounded-circle p-2"></i>
-      </router-link>
+      <div class="previous mt-5">
+        <router-link to="/" class="btn">
+          <i class="fas fa-undo-alt bg-funDarkOrange text-white rounded-circle p-2"></i>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -66,8 +64,8 @@ export default {
 .login {
   width: 320px;
   text-align: center;
-  position:absolute;
-  top:25%;
+  position: absolute;
+  top: 25%;
 }
 .login_form {
   width: 100%;
@@ -75,9 +73,5 @@ export default {
   background: white;
   border-radius: 10px;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
-}
-.previous{
-  position:absolute;
-  bottom:25%;
 }
 </style>
